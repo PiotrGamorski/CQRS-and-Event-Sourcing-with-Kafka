@@ -1,6 +1,6 @@
 ﻿using CQRS.Core.Events;
 
-namespace CQRS.Core.Domain
+namespace CQRS.Core.Domain.Primitives
 {
     public abstract class AggregateRoot
     {

@@ -1,4 +1,4 @@
-﻿using CQRS.Core.Domain;
+﻿using CQRS.Core.Application.Persistance;
 using CQRS.Core.Events;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -18,7 +18,7 @@ namespace Post.Command.Infrastructure.Repositories
             _eventStoreCollection = mongoDatabase.GetCollection<EventModel>(config.Value.Collection);
         }
 
-        public async Task<List<EventModel>> FindByAggreagateId(Guid aggregateId)
+        public async Task<List<EventModel>> FindByAggreagateIdAsync(Guid aggregateId)
         {
             return await _eventStoreCollection
                 .Find(x => x.AggregateIdentifier == aggregateId)

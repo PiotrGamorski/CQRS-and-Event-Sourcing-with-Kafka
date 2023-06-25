@@ -1,10 +1,10 @@
 ﻿using CQRS.Core.Events;
 
-namespace CQRS.Core.Domain
+namespace CQRS.Core.Application.Persistance
 {
     public interface IEventStoreRepository
     {
         Task SaveAsync(EventModel @event);
-        Task<List<EventModel>> FindByAggreagateId(Guid aggregateId);
+        Task<List<EventModel>> FindByAggreagateIdAsync(Guid aggregateId);
     }
 }

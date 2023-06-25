@@ -1,4 +1,4 @@
-﻿using CQRS.Core.Commands;
+﻿using CQRS.Core.Application.Commands;
 using CQRS.Core.Infrastructure;
 
 namespace Post.Command.Infrastructure.Dispatchers

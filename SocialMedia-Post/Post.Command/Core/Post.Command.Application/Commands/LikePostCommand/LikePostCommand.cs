@@ -1,4 +1,4 @@
-﻿using CQRS.Core.Commands;
+﻿using CQRS.Core.Application.Commands;
 
 namespace Post.Command.Application.Commands.LikePostCommand
 {

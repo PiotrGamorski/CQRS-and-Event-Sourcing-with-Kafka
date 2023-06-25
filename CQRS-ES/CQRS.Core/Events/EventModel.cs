@@ -11,7 +11,7 @@ namespace CQRS.Core.Events
         public DateTime TimeStamp { get; init; }
         public Guid AggregateIdentifier { get; init; }
         public string AggregateType { get; init; } = null!;
-        public int Version { get; init; }
+        public int Version { get; set; }
         public string EventType { get; init; } = null!;
         public BaseEvent EventData { get; init; } = null!;
     }

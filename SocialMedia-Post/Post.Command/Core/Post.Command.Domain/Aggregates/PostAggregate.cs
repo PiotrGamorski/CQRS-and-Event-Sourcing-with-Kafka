@@ -1,4 +1,4 @@
-﻿using CQRS.Core.Domain;
+﻿using CQRS.Core.Domain.Primitives;
 using Post.Common.Events.CommentAddedEvent;
 using Post.Common.Events.CommentRemovedEvent;
 using Post.Common.Events.CommentUpdatedEvent;
