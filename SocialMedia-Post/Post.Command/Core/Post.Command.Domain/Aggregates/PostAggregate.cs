@@ -15,6 +15,16 @@ namespace Post.Command.Domain.Aggregates
         {
         }
 
+        private bool _active;
+        private string _author = null!;
+        private Dictionary<Guid, Tuple<string, string>> _comments = new();
+
+        public bool Active
+        {
+            get => _active; set => _active = value;
+        }
+
+        #region CreatePost
         public PostAggregate(Guid id, string author, string message)
         {
             RaiseEvent(new PostCreatedEvent()
@@ -32,15 +42,7 @@ namespace Post.Command.Domain.Aggregates
             _active = true;
             _author = @event.Author;
         }
-
-        private bool _active;
-        private string _author = null!;
-        private Dictionary<Guid, Tuple<string, string>> _comments = new();
-
-        public bool Active 
-        {
-            get => _active; set => _active = value;
-        }
+        #endregion
 
         #region EditMessage
         public void EditMessage(string message) 
