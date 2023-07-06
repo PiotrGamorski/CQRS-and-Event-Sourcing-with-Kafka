@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace CQRS.Core.Events
+namespace CQRS.Core.Application.Events
 {
     public class EventModel
     {

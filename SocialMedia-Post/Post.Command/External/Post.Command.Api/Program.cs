@@ -1,13 +1,16 @@
 using Post.Command.Api;
 using Post.Command.Application;
+using Post.Command.Application.Commands.NewPostCommand;
+using Post.Command.Application.Handlers;
 using Post.Command.Infrastructure;
+using Post.Command.Infrastructure.Dispatchers;
 
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services
         .AddPresentation()
-        .AddApplication()
-        .AddInfrastructure(builder.Configuration);
+        .AddInfrastructure(builder.Configuration, builder.Services.BuildServiceProvider())
+        .AddApplication();
 
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();

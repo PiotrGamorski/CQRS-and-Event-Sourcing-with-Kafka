@@ -1,4 +1,4 @@
-﻿using CQRS.Core.Events;
+﻿using CQRS.Core.Application.Events;
 
 namespace CQRS.Core.Domain.Primitives
 {

@@ -1,4 +1,4 @@
-﻿using CQRS.Core.Events;
+﻿using CQRS.Core.Application.Events;
 
 namespace Post.Common.Events.PostEventRemoved
 {

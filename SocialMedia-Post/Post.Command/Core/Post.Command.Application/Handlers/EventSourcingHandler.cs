@@ -1,6 +1,5 @@
-﻿using CQRS.Core.Application.Handlers;
+﻿using CQRS.Core.Application.Persistance;
 using CQRS.Core.Domain.Primitives;
-using CQRS.Core.Infrastructure;
 using Post.Command.Domain.Aggregates;
 
 namespace Post.Command.Application.Handlers

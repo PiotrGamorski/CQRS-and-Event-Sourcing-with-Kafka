@@ -1,7 +1,7 @@
-﻿using CQRS.Core.Application.Persistance;
+﻿using CQRS.Core.Application.Events;
+using CQRS.Core.Application.Persistance;
+using CQRS.Core.Application.Persistance.Repositories;
 using CQRS.Core.Domain.Exceptions;
-using CQRS.Core.Events;
-using CQRS.Core.Infrastructure;
 using Post.Command.Domain.Aggregates;
 
 namespace Post.Command.Application.Stores

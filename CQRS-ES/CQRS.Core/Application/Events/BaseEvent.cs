@@ -1,10 +1,10 @@
 ﻿using CQRS.Core.Messages;
 
-namespace CQRS.Core.Events
+namespace CQRS.Core.Application.Events
 {
     public class BaseEvent : Message
     {
-        protected BaseEvent(string type) 
+        protected BaseEvent(string type)
         {
             Type = type;
         }

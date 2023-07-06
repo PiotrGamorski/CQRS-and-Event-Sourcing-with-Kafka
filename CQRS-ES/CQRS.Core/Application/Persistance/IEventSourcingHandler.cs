@@ -1,6 +1,6 @@
 ﻿using CQRS.Core.Domain.Primitives;
 
-namespace CQRS.Core.Application.Handlers
+namespace CQRS.Core.Application.Persistance
 {
     public interface IEventSourcingHandler<T>
     {

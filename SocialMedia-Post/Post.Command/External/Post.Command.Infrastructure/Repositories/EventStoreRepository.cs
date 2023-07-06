@@ -1,5 +1,5 @@
-﻿using CQRS.Core.Application.Persistance;
-using CQRS.Core.Events;
+﻿using CQRS.Core.Application.Events;
+using CQRS.Core.Application.Persistance.Repositories;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using Post.Command.Infrastructure.Config;

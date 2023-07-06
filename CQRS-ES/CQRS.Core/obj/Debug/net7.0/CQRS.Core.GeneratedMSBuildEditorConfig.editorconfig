@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CQRS.Core
-build_property.ProjectDir = E:\#Projekty\.Net\CQRS_&_Event Sourcing with Kafka\CQRS-ES\CQRS.Core\
+build_property.ProjectDir = e:\#Projekty\.Net\CQRS_&_Event Sourcing with Kafka\CQRS-ES\CQRS.Core\

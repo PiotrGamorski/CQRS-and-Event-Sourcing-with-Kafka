@@ -1,6 +1,6 @@
 ﻿using CQRS.Core.Application.Commands;
 
-namespace CQRS.Core.Infrastructure
+namespace CQRS.Core
 {
     public interface ICommandDispatcher
     {
