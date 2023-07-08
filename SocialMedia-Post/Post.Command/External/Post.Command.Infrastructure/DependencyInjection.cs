@@ -27,6 +27,7 @@ namespace Post.Command.Infrastructure
         {
             services.RegisterCommandHandlers(serviceProvider);
             services.AddMongoDbConfig(configuration);
+            services.AddProducerConfig(configuration);
             services.AddScoped<IEventStoreRepository, EventStoreRepository>();
             services.AddScoped<IEventStore, EventStore>();
 
@@ -38,6 +39,15 @@ namespace Post.Command.Infrastructure
             var mongoDbConfig = new MongoDbConfig();
             configuration.Bind(MongoDbConfig.SectionName, mongoDbConfig);
             services.AddSingleton(Options.Create(mongoDbConfig));
+
+            return services;
+        }
+
+        private static IServiceCollection AddProducerConfig(this IServiceCollection services, ConfigurationManager configuration)
+        { 
+            var producerConfig = new ProducerConfig();
+            configuration.Bind(producerConfig);
+            services.AddSingleton(Options.Create(producerConfig));
 
             return services;
         }
