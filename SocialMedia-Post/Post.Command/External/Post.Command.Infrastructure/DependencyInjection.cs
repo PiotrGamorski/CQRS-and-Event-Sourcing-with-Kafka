@@ -1,6 +1,7 @@
 ﻿using CQRS.Core;
 using CQRS.Core.Application.Persistance;
 using CQRS.Core.Application.Persistance.Repositories;
+using CQRS.Core.Application.Producers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -14,6 +15,7 @@ using Post.Command.Application.Commands.RemoveCommentCommand;
 using Post.Command.Application.Stores;
 using Post.Command.Infrastructure.Config;
 using Post.Command.Infrastructure.Dispatchers;
+using Post.Command.Infrastructure.Producers;
 using Post.Command.Infrastructure.Repositories;
 
 namespace Post.Command.Infrastructure
@@ -29,6 +31,7 @@ namespace Post.Command.Infrastructure
             services.AddMongoDbConfig(configuration);
             services.AddProducerConfig(configuration);
             services.AddScoped<IEventStoreRepository, EventStoreRepository>();
+            services.AddScoped<IEventProducer, EventProducer>();
             services.AddScoped<IEventStore, EventStore>();
 
             return services;

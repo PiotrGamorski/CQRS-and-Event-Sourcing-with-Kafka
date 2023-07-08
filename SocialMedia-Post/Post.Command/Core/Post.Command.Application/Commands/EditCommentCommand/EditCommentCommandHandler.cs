@@ -1,5 +1,4 @@
 ﻿using CQRS.Core.Application.Persistance;
-using Post.Command.Application.Handlers;
 using Post.Command.Domain.Aggregates;
 
 namespace Post.Command.Application.Commands.EditCommentCommand
