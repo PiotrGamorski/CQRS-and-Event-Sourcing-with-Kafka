@@ -1,9 +1,6 @@
 using Post.Command.Api;
 using Post.Command.Application;
-using Post.Command.Application.Commands.NewPostCommand;
-using Post.Command.Application.Handlers;
 using Post.Command.Infrastructure;
-using Post.Command.Infrastructure.Dispatchers;
 
 var builder = WebApplication.CreateBuilder(args);
 {

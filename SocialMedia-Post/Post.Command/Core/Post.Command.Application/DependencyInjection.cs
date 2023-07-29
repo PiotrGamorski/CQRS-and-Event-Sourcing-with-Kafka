@@ -1,8 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Post.Command.Application.Commands.AddCommentCommand;
+using Post.Command.Application.Commands.DeletePostCommand;
 using Post.Command.Application.Commands.EditCommentCommand;
 using Post.Command.Application.Commands.EditMessageCommand;
 using Post.Command.Application.Commands.LikePostCommand;
 using Post.Command.Application.Commands.NewPostCommand;
+using Post.Command.Application.Commands.RemoveCommentCommand;
 
 namespace Post.Command.Application
 {
@@ -17,10 +20,14 @@ namespace Post.Command.Application
 
         private static IServiceCollection AddCommandHandlers(this IServiceCollection services) 
         {
-            services.AddScoped<INewPostCommandHandler, NewPostCommandHandler>();
-            services.AddScoped<IEditMessageCommandHandler, EditMessageCommandHandler>();
+            services.AddScoped<IAddCommentCommandHandler, AddCommentCommandHandler>();
+            services.AddScoped<IDeletePostCommandHandler, DeletePostCommandHandler>();
             services.AddScoped<IEditCommentCommandHandler, EditCommentCommandHandler>();
+            services.AddScoped<IEditMessageCommandHandler, EditMessageCommandHandler>();
             services.AddScoped<ILikePostCommandHandler, LikePostCommandHandler>();
+            services.AddScoped<INewPostCommandHandler, NewPostCommandHandler>();
+            services.AddScoped<IRemoveCommentCommandHandler, RemoveCommentCommandHandler>();
+            
 
             return services;
         }

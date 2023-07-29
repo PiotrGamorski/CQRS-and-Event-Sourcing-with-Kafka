@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Post.Command\Core\Post.Command.Domain\Post.Command.Domain.csproj" />
     <ProjectReference Include="..\..\..\..\CQRS-ES\CQRS.Core\CQRS.Core.csproj" />
+    <ProjectReference Include="..\Post.Query.Domain\Post.Query.Domain.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
