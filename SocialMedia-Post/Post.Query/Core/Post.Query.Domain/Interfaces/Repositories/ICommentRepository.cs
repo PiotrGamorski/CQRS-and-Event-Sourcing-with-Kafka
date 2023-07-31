@@ -7,6 +7,6 @@ namespace Post.Query.Application.Persistance.Repositories
         Task CreateAsync(CommentEntity commentEntity);
         Task UpdateAsync(CommentEntity commentEntity);
         Task DeleteAsync(Guid commentId);
-        Task<CommentEntity> GetByIdAsync(Guid commentId);
+        Task<CommentEntity?> GetByIdAsync(Guid commentId);
     }
 }

@@ -14,6 +14,6 @@ namespace Post.Query.Domain.Entities
         public bool Edited { get; init; }
         public Guid PostId { get; init; }
         [System.Text.Json.Serialization.JsonIgnore]
-        public PostEntity Post { get; init; } = null!;
+        public virtual PostEntity Post { get; init; } = null!;
     }
 }

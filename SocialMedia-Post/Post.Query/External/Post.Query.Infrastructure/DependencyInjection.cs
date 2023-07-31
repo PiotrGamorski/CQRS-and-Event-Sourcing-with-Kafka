@@ -19,20 +19,13 @@ namespace Post.Query.Infrastructure
         private static IServiceCollection AddPersistance(this IServiceCollection services, ConfigurationManager configuration)
         {
             services.AddDataAccess(configuration);
+            services.CreateDatabase();
             services.AddRepositories();
 
             return services;
         }
 
-        private static IServiceCollection AddRepositories(this IServiceCollection services)
-        {
-            services.AddScoped<IPostRepository, PostRepository>();
-            services.AddScoped<ICommentRepository, CommentRepository>();
-
-            return services;
-        }
-
-        private static IServiceCollection AddDataAccess(this IServiceCollection services, ConfigurationManager configuration) 
+        private static IServiceCollection AddDataAccess(this IServiceCollection services, ConfigurationManager configuration)
         {
             Action<DbContextOptionsBuilder> configureDbContext = optionsBuilder =>
             {
@@ -42,7 +35,26 @@ namespace Post.Query.Infrastructure
             };
 
             services.AddDbContext<DatabaseContext>(configureDbContext);
-            services.AddSingleton<DatabaseContextFactory>(new DatabaseContextFactory(configureDbContext));
+            services.AddSingleton(new DatabaseContextFactory(configureDbContext));
+
+            return services;
+        }
+
+        private static IServiceCollection CreateDatabase(this IServiceCollection services) 
+        {
+            var dataContext = services
+                .BuildServiceProvider()
+                .GetRequiredService<DatabaseContext>();
+
+            dataContext.Database.EnsureCreated();
+
+            return services;
+        }
+
+        private static IServiceCollection AddRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
 
             return services;
         }
