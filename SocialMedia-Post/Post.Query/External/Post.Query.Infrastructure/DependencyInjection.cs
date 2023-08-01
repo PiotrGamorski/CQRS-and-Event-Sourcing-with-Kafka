@@ -1,8 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Confluent.Kafka;
+using CQRS.Core.Application.Consumers;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Post.Query.Application.Handlers;
 using Post.Query.Application.Persistance.Repositories;
+using Post.Query.Infrastructure.Consumers;
 using Post.Query.Infrastructure.Persistance.DataAccess;
 using Post.Query.Infrastructure.Persistance.Repositories;
 
@@ -13,7 +16,6 @@ namespace Post.Query.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, ConfigurationManager configuration)
         {
             services.AddPersistance(configuration);
-
             return services;
         }
 
@@ -23,6 +25,7 @@ namespace Post.Query.Infrastructure
             services.CreateDatabase();
             services.AddRepositories();
             services.AddHandlers();
+            services.AddKafkaConsumer(configuration);
 
             return services;
         }
@@ -64,6 +67,13 @@ namespace Post.Query.Infrastructure
         private static IServiceCollection AddHandlers(this IServiceCollection services)
         {
             services.AddScoped<IEventHandler, Handlers.EventHandler>();
+            return services;
+        }
+
+        private static IServiceCollection AddKafkaConsumer(this IServiceCollection services, ConfigurationManager configuration)
+        {
+            services.Configure<ConsumerConfig>(configuration.GetSection(nameof(ConsumerConfig)));
+            services.AddScoped<IEventConsumer, EventConsumer>();
 
             return services;
         }
