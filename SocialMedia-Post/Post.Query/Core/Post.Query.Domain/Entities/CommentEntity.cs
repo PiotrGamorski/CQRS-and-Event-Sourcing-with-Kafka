@@ -9,9 +9,9 @@ namespace Post.Query.Domain.Entities
         [Key]
         public Guid CommentId { get; init; }
         public string Username { get; init; } = null!;
-        public DateTime CommentDate { get; init; }
-        public string Comment { get; init; } = null!;
-        public bool Edited { get; init; }
+        public DateTime CommentDate { get; set; }
+        public string Comment { get; set; } = null!;
+        public bool Edited { get; set; }
         public Guid PostId { get; init; }
         [System.Text.Json.Serialization.JsonIgnore]
         public virtual PostEntity Post { get; init; } = null!;

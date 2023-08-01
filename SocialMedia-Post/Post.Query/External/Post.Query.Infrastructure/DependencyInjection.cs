@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Post.Query.Application.Handlers;
 using Post.Query.Application.Persistance.Repositories;
 using Post.Query.Infrastructure.Persistance.DataAccess;
 using Post.Query.Infrastructure.Persistance.Repositories;
@@ -21,6 +22,7 @@ namespace Post.Query.Infrastructure
             services.AddDataAccess(configuration);
             services.CreateDatabase();
             services.AddRepositories();
+            services.AddHandlers();
 
             return services;
         }
@@ -55,6 +57,13 @@ namespace Post.Query.Infrastructure
         {
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
+
+            return services;
+        }
+
+        private static IServiceCollection AddHandlers(this IServiceCollection services)
+        {
+            services.AddScoped<IEventHandler, Handlers.EventHandler>();
 
             return services;
         }
