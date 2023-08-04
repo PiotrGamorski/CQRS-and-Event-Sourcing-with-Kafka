@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CQRS.Core.Application.Persistance;
+using Microsoft.Extensions.DependencyInjection;
 using Post.Command.Application.Commands.AddCommentCommand;
 using Post.Command.Application.Commands.DeletePostCommand;
 using Post.Command.Application.Commands.EditCommentCommand;
@@ -6,6 +7,9 @@ using Post.Command.Application.Commands.EditMessageCommand;
 using Post.Command.Application.Commands.LikePostCommand;
 using Post.Command.Application.Commands.NewPostCommand;
 using Post.Command.Application.Commands.RemoveCommentCommand;
+using Post.Command.Application.Handlers;
+using Post.Command.Application.Stores;
+using Post.Command.Domain.Aggregates;
 
 namespace Post.Command.Application
 {

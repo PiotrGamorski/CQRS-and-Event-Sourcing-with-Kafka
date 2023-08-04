@@ -3,8 +3,8 @@
     public sealed class MongoDbConfig
     {
         public const string SectionName = nameof(MongoDbConfig);
-        public string ConnectionString { get; init; } = null!;
-        public string Database { get; init; } = null!;
-        public string Collection { get; init; } = null!;
+        public string ConnectionString { get; set; } = "mongodb://localhost:27017";
+        public string Database { get; set; } = null!;
+        public string Collection { get; set; } = null!;
     }
 }

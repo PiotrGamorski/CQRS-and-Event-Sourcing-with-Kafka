@@ -12,7 +12,9 @@ using Post.Command.Application.Commands.EditMessageCommand;
 using Post.Command.Application.Commands.LikePostCommand;
 using Post.Command.Application.Commands.NewPostCommand;
 using Post.Command.Application.Commands.RemoveCommentCommand;
+using Post.Command.Application.Handlers;
 using Post.Command.Application.Stores;
+using Post.Command.Domain.Aggregates;
 using Post.Command.Infrastructure.Config;
 using Post.Command.Infrastructure.Dispatchers;
 using Post.Command.Infrastructure.Producers;
@@ -22,17 +24,14 @@ namespace Post.Command.Infrastructure
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddInfrastructure(
-            this IServiceCollection services, 
-            ConfigurationManager configuration, 
-            IServiceProvider serviceProvider)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, ConfigurationManager configuration)
         {
-            services.RegisterCommandHandlers(serviceProvider);
             services.AddMongoDbConfig(configuration);
             services.AddProducerConfig(configuration);
             services.AddScoped<IEventStoreRepository, EventStoreRepository>();
             services.AddScoped<IEventProducer, EventProducer>();
             services.AddScoped<IEventStore, EventStore>();
+            services.AddScoped<IEventSourcingHandler<PostAggregate>, EventSourcingHandler>();
 
             return services;
         }
@@ -52,24 +51,6 @@ namespace Post.Command.Infrastructure
             configuration.Bind(producerConfig);
             services.AddSingleton(Options.Create(producerConfig));
 
-            return services;
-        }
-
-        private static IServiceCollection RegisterCommandHandlers(this IServiceCollection services, IServiceProvider serviceProvider)
-        {
-            var dispatcher = new CommandDispatcher();
-
-            dispatcher.RegisterHandler<NewPostCommand>(serviceProvider.GetRequiredService<INewPostCommandHandler>().HandleAsync);
-            dispatcher.RegisterHandler<LikePostCommand>(serviceProvider.GetRequiredService<ILikePostCommandHandler>().HandleAsync);
-            dispatcher.RegisterHandler<AddCommentCommand>(serviceProvider.GetRequiredService<IAddCommentCommandHandler>().HandleAsync);
-            dispatcher.RegisterHandler<EditMessageCommand>(serviceProvider.GetRequiredService<IEditMessageCommandHandler>().HandleAsync);
-            dispatcher.RegisterHandler<EditCommentCommand>(serviceProvider.GetRequiredService<IEditCommentCommandHandler>().HandleAsync);
-            dispatcher.RegisterHandler<RemoveCommentCommand>(serviceProvider.GetRequiredService<IRemoveCommentCommandHandler>().HandleAsync);
-            dispatcher.RegisterHandler<DeletePostCommand>(serviceProvider.GetRequiredService<IDeletePostCommandHandler>().HandleAsync);
-
-            services.AddSingleton<ICommandDispatcher>(_ => dispatcher);
-
-            
             return services;
         }
     }
