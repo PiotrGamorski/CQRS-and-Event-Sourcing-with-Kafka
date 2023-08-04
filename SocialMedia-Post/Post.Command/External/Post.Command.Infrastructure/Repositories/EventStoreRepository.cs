@@ -13,8 +13,7 @@ namespace Post.Command.Infrastructure.Repositories
 
         public EventStoreRepository(IOptions<MongoDbConfig> config) 
         {
-            InitializeMongoDb(config, out var eventStoreCollection);
-            _eventStoreCollection = eventStoreCollection;
+            _eventStoreCollection = InitializeMongoDb(config);
         }
 
         public async Task<List<EventModel>> FindByAggreagateIdAsync(Guid aggregateId)
@@ -32,18 +31,17 @@ namespace Post.Command.Infrastructure.Repositories
                 .ConfigureAwait(false);
         }
 
-        private void InitializeMongoDb(IOptions<MongoDbConfig> config, out IMongoCollection<EventModel> eventStoreCollection)
+        private IMongoCollection<EventModel> InitializeMongoDb(IOptions<MongoDbConfig> config)
         {
             var connectionString = config.Value.ConnectionString;
-            eventStoreCollection = null!;
             IMongoDatabase? mongoDatabase = null;
 
             if (connectionString == null)
             {
-                eventStoreCollection = null!;
-                return;
+                throw new InvalidOperationException("MongoDB connection string is not provided.");
             }
-               
+              
+            
             if (TryEstablishMongoDbConnection(connectionString, out var mongoClient))
             {
                 mongoDatabase = mongoClient.GetDatabase(config.Value.Database);
@@ -55,8 +53,10 @@ namespace Post.Command.Infrastructure.Repositories
 
             if (mongoDatabase != null)
             {
-                eventStoreCollection = mongoDatabase.GetCollection<EventModel>(config.Value.Collection);
+                return mongoDatabase.GetCollection<EventModel>(config.Value.Collection);
             }
+
+            throw new InvalidOperationException("Failed to initialize MongoDB collection.");
         }
 
         private bool TryEstablishMongoDbConnection(string connectionString, out MongoClient mongoClient)
